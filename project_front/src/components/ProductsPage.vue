@@ -106,7 +106,10 @@ import route from '../router'
                     else{
                       this.hid = true;
                     }
-                }
+            },
+            createProduto(){
+                route.push({name: 'create'})
+            }
         },
         mounted() {
             this.findAll();

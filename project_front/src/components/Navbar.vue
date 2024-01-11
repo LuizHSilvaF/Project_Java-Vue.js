@@ -1,9 +1,6 @@
 <template>
     <div id="nav">
-        <div id="links">
-            <router-link to="/">Usuarios</router-link>
-            <router-link to="">Produtos</router-link>
-        </div>
+        
     </div>
 </template>
 
