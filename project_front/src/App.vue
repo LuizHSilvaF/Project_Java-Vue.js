@@ -10,24 +10,22 @@
 
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+*{
+    font-family: Helvetica;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  } 
 
-nav {
-  padding: 30px;
-}
+  .main-container{
+    margin: 50px;
+    min-height: 250px;
+  }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
+  h1{
+    text-align: center;
+    font-size: 42px;
+    margin-bottom: 30px;
+    color: #0a3d807c;
+  }
 </style>

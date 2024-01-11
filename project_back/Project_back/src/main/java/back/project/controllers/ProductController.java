@@ -19,7 +19,7 @@ import back.project.service.ProductService;
 
 @RestController
 @RequestMapping(value = "/products")
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8081")
 public class ProductController {
 
 	@Autowired
