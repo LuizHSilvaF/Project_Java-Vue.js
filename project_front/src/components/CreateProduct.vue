@@ -20,7 +20,7 @@
                         </option>
                     </select>
                 </div>
-                <div><input type="text" v-model="price" required placeholder="0,00"></div>
+                <div><input type="text" v-model="price" @input="filtrarNumeros" required placeholder="0,00"></div>
                 <div><input type="text" v-model="quantity" required></div>
                 <input type="submit" class="save-btn" value="Save">
                 <button class="limpar-btn" @click="limpar()" >Limpar</button>
@@ -42,14 +42,52 @@ import route from '../router'
             return{
                 tipos: null,
                 selectOption: "Selecione",
+                name: null,
+                price: null,
+                quantity: null
             }
         },
         methods: {
+            async create(e){
+                e.preventDefault();
+
+                const part = this.selectOption.split(',');
+                const id = part[0];
+                const tipo = part[1];
+
+                const product = {
+                    name: this.name,
+                    tipo: {
+                        id,
+                        tipo
+                    },
+                    price: this.price,
+                    quantity: this.quantity
+                }
+                const dataJson = JSON.stringify(product);
+
+                await fetch("http://localhost:3003/products/create", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: dataJson
+                });
+
+                this.limpar();
+            },
             async getTipos(){
                 const req = await fetch("http://localhost:3003/tipos/getTipos");
                 const data = await req.json();
 
                 this.tipos = data;
+            },
+            limpar(){
+                this.name= "",
+                this.selectOption= "Selecione",
+                this.price= "",
+                this.quantity= ""
+            },
+            filtrarNumeros() {
+                this.price = this.price.replace(/[^0-9.]/g, '');
             }
         },
         mounted(){

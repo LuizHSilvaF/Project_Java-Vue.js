@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,14 +18,17 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String tipo;
+	
+	@ManyToOne
+	@JoinColumn(name = "tipo_id")
+	private TypeProduct tipo;
 	private Double price;
 	private int quantity;
 	
 	public Product() {
 	}
 
-	public Product(Long id, String name, String tipo, Double price, int quantity) {
+	public Product(Long id, String name, TypeProduct tipo, Double price, int quantity) {
 		this.id = id;
 		this.name = name;
 		this.tipo = tipo;
@@ -47,11 +52,11 @@ public class Product {
 		this.name = name;
 	}
 
-	public String getTipo() {
+	public TypeProduct getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(TypeProduct tipo) {
 		this.tipo = tipo;
 	}
 
