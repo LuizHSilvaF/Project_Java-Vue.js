@@ -29,7 +29,7 @@
                 <div><input type="text" readonly v-model="findProduct.quantity"></div>
                 <button class="save-btn" @click="updateUser(findProduct.id, findProduct.name, findProduct.price)" :hidden="hid">Save</button>
                 <button class="editar-btn" @click="readData()">Editar</button>
-                <button class="excluir-btn" @click="deleteProduto(findProduct.id, findProduct.name)">Excluir</button>
+                <button class="excluir-btn" @click="deleteProduct(findProduct.id)">Excluir</button>
             </div>
             </div>
             <div v-else>
@@ -40,7 +40,7 @@
                 <div><input type="text" readonly v-model="product.quantity"></div>
                 <button class="save-btn" @click="updateUser(product.id, product.name, product.price)" :hidden="hid">Save</button>
                 <button class="editar-btn" @click="readData()">Editar</button>
-                <button class="excluir-btn" @click="deleteProduto(product.id, product.name)">Excluir</button>
+                <button class="excluir-btn" @click="deleteProduct(product.id)">Excluir</button>
             </div>
             </div>
         </div>
@@ -75,8 +75,13 @@ import route from '../router'
                 const data = await req.json();
 
                 this.findProducts = data;
-            }
-            ,
+            },
+            async deleteProduct(id){
+                await fetch(`http://localhost:3003/products/delete/${id}`, {
+                method: "DELETE"
+                });
+                this.findAll();
+            },
             readData(){
                 this.read = !this.read;
                     if(this.read===false){
