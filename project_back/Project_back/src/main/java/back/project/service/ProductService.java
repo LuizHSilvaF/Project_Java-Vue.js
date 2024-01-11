@@ -22,20 +22,18 @@ public class ProductService {
 		return repo.findByName(name);
 	}
 	
-	public Product Create(Product entity) {
+	public Product create(Product entity) {
 		return repo.save(entity);
 	}
 	
-	public void Delete(Long id) {
+	public void delete(Long id) {
 		repo.deleteById(id);
 	}
 	
-	public Product Update(Long id, Product body) {
+	public Product update(Long id, Product body) {
 		Product old = repo.findById(id).get();
 		old.setName(body.getName());
 		old.setPrice(body.getPrice());
-		old.setTipo(body.getTipo());
-		old.setQuantity(body.getQuantity());
 		return repo.save(old);
 	}
 }

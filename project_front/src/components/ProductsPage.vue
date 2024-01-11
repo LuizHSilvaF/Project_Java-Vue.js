@@ -27,7 +27,7 @@
                <div><input type="text" readonly :value="findProduct.tipo ? findProduct.tipo.tipo : ''"></div>
                 <div><input type="text" :readonly="read" v-model="findProduct.price"></div>
                 <div><input type="text" readonly v-model="findProduct.quantity"></div>
-                <button class="save-btn" @click="updateUser(findProduct.id, findProduct.name, findProduct.price)" :hidden="hid">Save</button>
+                <button class="save-btn" @click="updateProduct(findProduct.id, findProduct.name, findProduct.price)" :hidden="hid">Save</button>
                 <button class="editar-btn" @click="readData()">Editar</button>
                 <button class="excluir-btn" @click="deleteProduct(findProduct.id)">Excluir</button>
             </div>
@@ -38,7 +38,7 @@
                 <div><input type="text" readonly :value="product.tipo ? product.tipo.tipo : ''"></div>
                 <div><input type="text" :readonly="read" v-model="product.price"></div>
                 <div><input type="text" readonly v-model="product.quantity"></div>
-                <button class="save-btn" @click="updateUser(product.id, product.name, product.price)" :hidden="hid">Save</button>
+                <button class="save-btn" @click="updateProduct(product.id, product.name, product.price)" :hidden="hid">Save</button>
                 <button class="editar-btn" @click="readData()">Editar</button>
                 <button class="excluir-btn" @click="deleteProduct(product.id)">Excluir</button>
             </div>
@@ -59,7 +59,7 @@ import route from '../router'
             return{
                 products: null,
                 findProducts: null,
-                read: true
+                read: false
             }
         },
         methods: {
@@ -80,6 +80,22 @@ import route from '../router'
                 await fetch(`http://localhost:3003/products/delete/${id}`, {
                 method: "DELETE"
                 });
+                this.findAll();
+            },
+            async updateProduct(id, name, price){
+                const data = {
+                    name, 
+                    price
+                }
+
+                const dataJson = JSON.stringify(data);
+
+                await fetch(`http://localhost:3003/products/update/${id}`, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: dataJson
+                });
+
                 this.findAll();
             },
             readData(){

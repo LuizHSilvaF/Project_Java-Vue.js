@@ -36,17 +36,17 @@ public class ProductController {
 	}
 	
 	@PostMapping(value = "/create")
-	public Product Create(@RequestBody Product entity) {
-		return service.Create(entity);
+	public Product create(@RequestBody Product entity) {
+		return service.create(entity);
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")
-	public void Delete(@PathVariable Long id) {
-		service.Delete(id);
+	public void delete(@PathVariable Long id) {
+		service.delete(id);
 	}
 	
 	@PutMapping(value = "/update/{id}")
-	public Product Update(@PathVariable Long id,@RequestBody Product body) {
-		return service.Update(id, body);
+	public Product update(@PathVariable Long id,@RequestBody Product body) {
+		return service.update(id, body);
 	}
 }
