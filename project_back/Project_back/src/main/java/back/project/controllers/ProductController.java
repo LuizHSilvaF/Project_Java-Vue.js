@@ -30,8 +30,8 @@ public class ProductController {
 		return service.findAll();
 	}
 	
-	@GetMapping(value = "/findByName/{name}")
-	public List<Product> findByName(@PathVariable String name){
+	@GetMapping(value = "/findByName")
+	public List<Product> findByName(@RequestParam String name){
 		return service.findByName(name);
 	}
 	

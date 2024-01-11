@@ -2,8 +2,8 @@
     <div id="product-table">
         <div>
             <div id="product-search">
-                <div><input type="search" id="pesquisa" name="pesquisa" v-model="pesquisa" placeholder="Pesquisa por nome">
-                <button class="pesquisar-btn" @click="findProduct(pesquisa)">Pesquisar</button>
+                <div><input type="search" id="pesquisa" name="pesquisa" v-model="name" placeholder="Pesquisa por nome">
+                <button class="pesquisar-btn" @click="findByName(name)">Pesquisar</button>
                 <select class="ordenacao" v-model="opcaoSelecionada" @change="pesquisaTipo(opcaoSelecionada)">
                     <option disabled selected>Selecione</option>
                     <option v-for="tipo in tipos" :key="tipo.id" :value="tipo.id">
@@ -70,6 +70,13 @@ import route from '../router'
                 this.products = data;
                 this.findProducts = null;
             },
+            async findByName(name){
+                const req = await fetch(`http://localhost:3003/products/findByName?name=${name}`);
+                const data = await req.json();
+
+                this.findProducts = data;
+            }
+            ,
             readData(){
                 this.read = !this.read;
                     if(this.read===false){
